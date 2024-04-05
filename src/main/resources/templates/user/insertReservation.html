@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Reservation - User Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>Create Reservation</h1>
+    <hr>
+    <form action="#" th:action="@{/user/reservation/save}" th:object="${reservation}" method="POST">
+        <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input type="date" th:field="*{startDate}" class="form-control mb-4 col-4" id="startDate">
+        </div>
+        <div class="form-group">
+            <label for="returnDate">Return Date</label>
+            <input type="date" th:field="*{returnDate}" class="form-control mb-4 col-4" id="returnDate">
+        </div>
+        <div class="form-group">
+            <label for="totalPrice">Total Price</label>
+            <input type="number" id="totalPrice" th:field="*{totalPrice}" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+            <label for="vehicle">Select Vehicle</label>
+            <select class="form-select form-control mb-4 col-4" th:field="*{vehicleId}" id="vehicle"
+                    aria-label="Select vehicle">
+                <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.name}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-info col-2">Save Reservation</button>
+    </form>
+
+    <script>
+        document.getElementById('returnDate').addEventListener('change', calculateTotalPrice);
+        document.getElementById('startDate').addEventListener('change', calculateTotalPrice);
+
+        function calculateTotalPrice() {
+            let startDate = new Date(document.getElementById('startDate').value);
+            let returnDate = new Date(document.getElementById('returnDate').value);
+            let differenceInTime = returnDate.getTime() - startDate.getTime();
+            let differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+            let totalPrice = differenceInDays * 5000;
+            document.getElementById('totalPrice').value = totalPrice;
+        }
+    </script>
+
+    <hr>
+    <a th:href="@{/user/reservation}">Back to list Reservation</a>
+</div>
+</body>
+</html>

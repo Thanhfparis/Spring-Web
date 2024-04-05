@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sales Dashboard</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<main class="container-fluid">
+	<div class="row justify-content-center mt-5">
+		<div class="col-md-6">
+			<h1 class="text-center mb-4">Sales Dashboard</h1>
+			<div class="list-group">
+				<a th:href="@{/sales/vehicle}" class="list-group-item list-group-item-action">List Vehicles</a>
+				<a th:href="@{/sales/reservation}" class="list-group-item list-group-item-action">List Reservations</a>
+			</div>
+		</div>
+	</div>
+</main>
+</body>
+</html>

@@ -43,7 +43,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "signin";
     }
 
     @PostMapping("/login/try")
@@ -72,7 +72,7 @@ public class UserController {
     @GetMapping("/user/reservation")
     public String reservation(Model model) {
         model.addAttribute("reservations", reservationRepository.findAllByUser_Id(userId));
-        return "user/reservation/list-reservation";
+        return "user/reservations";
     }
 
     @GetMapping("/user/reservation/form-create-reservation")
@@ -80,11 +80,11 @@ public class UserController {
         ReservationDto reservationDto = new ReservationDto();
         model.addAttribute("reservation", reservationDto);
         model.addAttribute("vehicles", vehicleRepository.findAll());
-        return "user/reservation/reservation-create";
+        return "user/insertReservation";
     }
 
     @PostMapping("/user/reservation/save")
-    public String saveComment(@ModelAttribute(name = "reservation") ReservationDto reservationDto) {
+    public String save(@ModelAttribute(name = "reservation") ReservationDto reservationDto) {
         Reservation reservation = new Reservation();
         User user = userRepository.findById(userId).get();
         Vehicle vehicle = vehicleRepository.findById(reservationDto.getVehicleId()).get();
@@ -95,19 +95,19 @@ public class UserController {
         reservation.setVehicle(vehicle);
         reservation.setTotalPrice(reservationDto.getTotalPrice());
         reservationRepository.save(reservation);
-        return "redirect:/user/reservation";
+        return "redirect:/user/reservations";
     }
 
     @GetMapping("/user/reservation/delete/{id}")
     public String deleteReservation(@PathVariable("id") int id) {
         reservationRepository.deleteById(id);
-        return "redirect:/user/reservation";
+        return "redirect:/user/reservations";
     }
 
     @GetMapping("/user/comment")
     public String indexComment(Model model) {
         model.addAttribute("comments", commentRepository.findAll());
-        return "user/comment/list-comment";
+        return "user/comments";
     }
 
     @GetMapping("/user/comment/form-create-comment")
@@ -116,7 +116,7 @@ public class UserController {
         model.addAttribute("comment", comment);
         model.addAttribute("users", userRepository.findAll());
         model.addAttribute("vehicles", vehicleRepository.findAll());
-        return "user/comment/comment-create";
+        return "user/insertComment";
     }
 
     @PostMapping("/user/comment/save")
@@ -130,12 +130,12 @@ public class UserController {
         comment.setVehicle(vehicle);
         comment.setContent(commentDto.getContent());
         commentRepository.save(comment);
-        return "redirect:/user/comment";
+        return "redirect:/user/comments";
     }
 
     @GetMapping("/user/comment/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         commentRepository.deleteById(id);
-        return "redirect:/user/comment/";
+        return "redirect:/user/comments";
     }
 }

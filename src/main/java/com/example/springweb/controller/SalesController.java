@@ -40,13 +40,13 @@ public class SalesController {
     @GetMapping("/sales/vehicle")
     public String vehicles(Model model) {
         model.addAttribute("vehicles", vehicleRepository.findAllBySales_Id(this.id));
-        return "sales/list-vehicle";
+        return "sales/vehicles";
     }
 
     @GetMapping("/sales/reservation")
     public String reservations(Model model) {
         model.addAttribute("reservations", reservationRepository.findAllByVehicle_Sales_Id(this.id));
-        return "sales/list-reservation";
+        return "sales/reservations";
     }
 
     @GetMapping("/sales/vehicle/form-create-vehicle")
@@ -54,7 +54,7 @@ public class SalesController {
         VehicleDto vehicleDto = new VehicleDto();
         model.addAttribute("vehicle",vehicleDto);
         model.addAttribute("types", vehicleTypeRepository.findAll());
-        return "sales/vehicle-create";
+        return "sales/insertVehicle";
     }
 
     @PostMapping("/sales/vehicle/save")
@@ -91,7 +91,7 @@ public class SalesController {
         vehicleDto.setUserId(vehicle.getSales().getId());
         vehicleDto.setFullName(vehicle.getSales().getFullName());
         model.addAttribute("vehicle",vehicleDto);
-        return "sales/vehicle-update";
+        return "sales/updateVehicle";
     }
 
     @PostMapping("/sales/vehicle/update")

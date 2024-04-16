@@ -164,7 +164,7 @@ CREATE TABLE `vehicle` (
   KEY `FKddtxlc05rojc56bprvek17hnk` (`vehicle_type_id`),
   CONSTRAINT `FKddtxlc05rojc56bprvek17hnk` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type` (`id`),
   CONSTRAINT `FKn8ieqxvxqmgp8u1h9qtscdvs6` FOREIGN KEY (`sales_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +173,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
-INSERT INTO `vehicle` VALUES (1,'red',1,NULL,'2024-04-05',NULL,'Scooter Suzuki',10000,40,NULL,2),(2,'green',NULL,4,'2024-04-05',30,'Toyota',200000,500,NULL,1),(3,'blue',NULL,4,'2024-04-05',50,'Van',300000,600,NULL,1);
+INSERT INTO `vehicle` VALUES (1,'red',1,NULL,'2024-04-05',NULL,'Scooter Suzuki',10000,40,2,2),(2,'green',NULL,4,'2024-04-05',30,'Toyota',200000,500,2,3),(3,'blue',NULL,4,'2024-04-05',50,'Van',300000,600,2,4),(4,'123',123,123,NULL,NULL,'123',123,123,2,2);
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,7 +189,7 @@ CREATE TABLE `vehicle_type` (
   `last_updated_date` date DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +198,7 @@ CREATE TABLE `vehicle_type` (
 
 LOCK TABLES `vehicle_type` WRITE;
 /*!40000 ALTER TABLE `vehicle_type` DISABLE KEYS */;
-INSERT INTO `vehicle_type` VALUES (1,'2024-04-05','Four wheels'),(2,'2024-04-05','Two wheels');
+INSERT INTO `vehicle_type` VALUES (1,'2024-04-05','Motorcycle'),(2,'2024-04-05','Scooter'),(3,'2024-04-05','Car'),(4,'2024-04-05','Truck');
 /*!40000 ALTER TABLE `vehicle_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,4 +219,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-05 16:39:38
+-- Dump completed on 2024-04-16 14:11:21

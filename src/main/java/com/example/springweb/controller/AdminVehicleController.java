@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/admin/vehicle")
+@RequestMapping()
 public class AdminVehicleController {
     private final VehicleTypeRepository vehicleTypeRepository;
     private final VehicleRepository vehicleRepository;
@@ -49,6 +49,7 @@ public class AdminVehicleController {
         vehicle.setPrice(vehicleDto.getPrice());
         vehicle.setWeight(vehicleDto.getWeight());
         vehicle.setName(vehicleDto.getName());
+        vehicle.setLength(vehicleDto.getLength());
         vehicle.setDoorNumbers(vehicleDto.getDoorNumbers());
         vehicle.setVehicleType(vehicleType);
         vehicle.setSales(user);
@@ -67,12 +68,19 @@ public class AdminVehicleController {
         vehicleDto.setCylinder(vehicle.getCylinder());
         vehicleDto.setPrice(vehicle.getPrice());
         vehicleDto.setWeight(vehicle.getWeight());
+        vehicleDto.setLength(vehicle.getLength());
         vehicleDto.setName(vehicle.getName());
         vehicleDto.setDoorNumbers(vehicle.getDoorNumbers());
         vehicleDto.setVehicleTypeId(vehicle.getVehicleType().getId());
         vehicleDto.setVehicleTypeName(vehicle.getVehicleType().getName());
-        vehicleDto.setUserId(vehicle.getSales().getId());
-        vehicleDto.setFullName(vehicle.getSales().getFullName());
+        if(vehicle.getSales() != null) {
+            vehicleDto.setUserId(vehicle.getSales().getId());
+            vehicleDto.setFullName(vehicle.getSales().getFullName());
+        }
+        else {
+            vehicleDto.setUserId(0);
+            vehicleDto.setFullName("");
+        }
         model.addAttribute("vehicle",vehicleDto);
         return "admin/updateVehicle";
     }
@@ -87,6 +95,7 @@ public class AdminVehicleController {
         vehicle.setPrice(vehicleDto.getPrice());
         vehicle.setWeight(vehicleDto.getWeight());
         vehicle.setName(vehicleDto.getName());
+        vehicle.setLength(vehicleDto.getLength());
         vehicle.setDoorNumbers(vehicleDto.getDoorNumbers());
         vehicle.setVehicleType(vehicleType);
         vehicle.setSales(user);

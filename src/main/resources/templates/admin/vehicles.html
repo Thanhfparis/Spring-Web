@@ -37,8 +37,8 @@
                 <td th:text="${vehicle.length}"></td>
                 <td th:text="${vehicle.color}"></td>
                 <td th:text="${vehicle.doorNumbers}"></td>
-                <td th:text="${vehicle.sales.fullName}"></td>
-                <td th:text="${vehicle.vehicleType.name}"></td>
+                <td th:text="${vehicle.sales!= null ? vehicle.sales.fullName : ''}"></td>
+                <td th:text="${vehicle.vehicleType != null ? vehicle.vehicleType.name : ''}"></td>
                 <td>
                     <a th:href="@{/admin/vehicle/form-update-vehicle/{id}(id=${vehicle.id})}" class="btn btn-primary">Update</a>
                     <a th:href="@{/admin/vehicle/delete/{id}(id=${vehicle.id})}" class="btn btn-danger">Delete</a>

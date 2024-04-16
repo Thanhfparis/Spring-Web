@@ -26,8 +26,32 @@
 			margin-bottom: 30px;
 		}
 
+		.row {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+
+		.col {
+			flex-basis: calc(33.33% - 20px);
+			margin-bottom: 20px;
+		}
+
+		.custom-border {
+			border: 1px solid #ddd;
+			padding: 20px;
+			border-radius: 5px;
+			background-color: #f8f8f8;
+			transition: border-color 0.3s ease;
+		}
+
+		.custom-border:hover {
+			border-color: #ccc;
+		}
+
 		.menu {
 			text-align: center;
+			margin-top: 20px;
 		}
 
 		.menu a {
@@ -49,6 +73,67 @@
 <body>
 <div class="container">
 	<h1>Admin Panel</h1>
+
+	<div class="row">
+		<div class="col">
+			<section class="custom-border">
+				<h3><b>Agences</b> <span th:text="${countSale}"></span></h3>
+			</section>
+		</div>
+
+		<div class="col">
+			<section class="custom-border">
+				<h3><b>Voitures</b> <span th:text="${countCar}"></span></h3>
+			</section>
+		</div>
+
+		<div class="col">
+			<section class="custom-border">
+				<h3><b>Camions</b> <span th:text="${countTruck}"></span></h3>
+			</section>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<section class="custom-border">
+				<h3><b>Motos</b> <span th:text="${countMotorcycle}"></span></h3>
+			</section>
+		</div>
+
+		<div class="col">
+			<section class="custom-border">
+				<h3><b>Clients</b> <span th:text="${countClient}"></span></h3>
+			</section>
+		</div>
+
+		<div class="col">
+			<section class="custom-border">
+				<h3><b>Reservations</b> <span th:text="${countReservation}"></span></h3>
+			</section>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<section class="custom-border">
+				<h3><b>Quatre roues</b> <span th:text="${twoWheels}"></span> €</h3>
+			</section>
+		</div>
+
+		<div class="col">
+			<section class="custom-border">
+				<h3><b>Deux roues</b> <span th:text="${fourWheels}"></span> €</h3>
+			</section>
+		</div>
+
+		<div class="col">
+			<section class="custom-border">
+				<h3><b>Total</b> <span th:text="${total}"></span> €</h3>
+			</section>
+		</div>
+	</div>
+
 	<div class="menu">
 		<a th:href="@{/admin/vehicle}">Vehicle</a>
 	</div>

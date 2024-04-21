@@ -95,13 +95,13 @@ public class UserController {
         reservation.setVehicle(vehicle);
         reservation.setTotalPrice(reservationDto.getTotalPrice());
         reservationRepository.save(reservation);
-        return "redirect:/user/reservations";
+        return "redirect:/user/reservation";
     }
 
     @GetMapping("/user/reservation/delete/{id}")
     public String deleteReservation(@PathVariable("id") int id) {
         reservationRepository.deleteById(id);
-        return "redirect:/user/reservations";
+        return "redirect:/user/reservation";
     }
 
     @GetMapping("/user/comment")
@@ -130,12 +130,12 @@ public class UserController {
         comment.setVehicle(vehicle);
         comment.setContent(commentDto.getContent());
         commentRepository.save(comment);
-        return "redirect:/user/comments";
+        return "redirect:/user/comment";
     }
 
     @GetMapping("/user/comment/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         commentRepository.deleteById(id);
-        return "redirect:/user/comments";
+        return "redirect:/user/comment";
     }
 }

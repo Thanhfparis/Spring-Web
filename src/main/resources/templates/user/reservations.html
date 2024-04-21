@@ -29,8 +29,8 @@
             <td th:text="${reservation.id}"></td>
             <td th:text="${reservation.vehicle.name}"></td>
             <td th:text="${reservation.user.fullName}"></td>
-            <td th:text="${#dates.format(reservation.startDate, 'dd/MM/yyyy HH:mm')}"></td>
-            <td th:text="${#dates.format(reservation.returnDate, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${reservation.startDate}"></td>
+            <td th:text="${reservation.returnDate}"></td>
             <td th:text="${reservation.totalPrice}"></td>
             <td>
                 <a class="btn btn-danger" th:href="@{/user/reservation/delete/{id}(id=${reservation.id})}"> Delete Reservation</a>

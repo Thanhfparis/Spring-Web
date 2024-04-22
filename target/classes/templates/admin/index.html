@@ -134,10 +134,30 @@
 		</div>
 	</div>
 
-	<div class="row" th:each="user : ${users}">
+	<div class="row">
 		<div class="col-md-4">
 			<section class="custom-border">
-				<h3><b th:text="${user.name}"></b> <span th:text="${user.percent}"></span> %</h3>
+				<h3><b>Voiture:</b> <span th:text="${carPercent}"></span> %</h3>
+			</section>
+		</div>
+
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Camion:</b> <span th:text="${truckPercent}"></span> %</h3>
+			</section>
+		</div>
+
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b>Deux roues:</b> <span th:text="${twoWheelPercent}"></span> %</h3>
+			</section>
+		</div>
+	</div>
+
+	<div class="row" th:each="agency : ${agencies}">
+		<div class="col-md-4">
+			<section class="custom-border">
+				<h3><b th:text="${agency.agencyName}"></b> <span th:text="${agency.percent}"></span> %</h3>
 			</section>
 		</div>
 	</div>

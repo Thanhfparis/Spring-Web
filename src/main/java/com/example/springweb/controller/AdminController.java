@@ -1,12 +1,9 @@
 package com.example.springweb.controller;
 
-import com.example.springweb.model.dto.UserDto;
+import com.example.springweb.model.dto.AgencyDto;
 import com.example.springweb.model.entities.Admin;
-import com.example.springweb.model.entities.User;
-import com.example.springweb.repository.AdminRepository;
-import com.example.springweb.repository.ReservationRepository;
-import com.example.springweb.repository.UserRepository;
-import com.example.springweb.repository.VehicleRepository;
+import com.example.springweb.model.entities.Agency;
+import com.example.springweb.repository.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,13 +22,15 @@ public class AdminController {
     private final UserRepository userRepository;
     private final ReservationRepository reservationRepository;
     private final VehicleRepository vehicleRepository;
+    private final AgencyRepository agencyRepository;
     private int userId = 0;
 
-    public AdminController(AdminRepository adminRepository, UserRepository userRepository, ReservationRepository reservationRepository, VehicleRepository vehicleRepository) {
+    public AdminController(AdminRepository adminRepository, UserRepository userRepository, ReservationRepository reservationRepository, VehicleRepository vehicleRepository, AgencyRepository agencyRepository) {
         this.adminRepository = adminRepository;
         this.userRepository = userRepository;
         this.reservationRepository = reservationRepository;
         this.vehicleRepository = vehicleRepository;
+        this.agencyRepository = agencyRepository;
     }
 
     @GetMapping("/admin/login")
@@ -81,18 +80,19 @@ public class AdminController {
         model.addAttribute("twoWheelPercent", twoWheelPercent);
 
         Long count = vehicleRepository.count();
-        List<UserDto> userDtos = new ArrayList<>();
-        List<User> users = userRepository.findAllByRole("SALES");
-        for(User user : users) {
-            Integer countVehicle = vehicleRepository.countByUserId(user.getId());
+        List<AgencyDto> agencyDtos = new ArrayList<>();
+        List<Agency> agencies = agencyRepository.findAll();
+        for(Agency agency : agencies) {
+            Integer countVehicle = vehicleRepository.countByAgencyId(agency.getId());
             double percent = Double.parseDouble(df.format((double) countVehicle / count * 100));
-            UserDto userDto = new UserDto();
-            userDto.setId(user.getId());
-            userDto.setName(user.getFullName());
-            userDto.setPercent(percent);
-            userDtos.add(userDto);
+            AgencyDto agencyDto = new AgencyDto();
+            agencyDto.setId(agency.getId());
+            agencyDto.setAgencyName(agency.getAgencyName());
+            agencyDto.setPercent(percent);
+            agencyDtos.add(agencyDto);
         }
-        model.addAttribute("users", userDtos);
+
+        model.addAttribute("agencies", agencyDtos);
         return "admin/index";
     }
 
